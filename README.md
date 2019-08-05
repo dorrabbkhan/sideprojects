@@ -1,4 +1,4 @@
-# sideprojects
+# Side Projects
 
  Fun projects I work on in free time or when learning new stuff. Here's the current roster:
 
