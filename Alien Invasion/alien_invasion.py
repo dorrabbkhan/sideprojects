@@ -47,6 +47,10 @@ class AlienInvasion:
             self._update_screen()
             self.ship.update()
             self.bullets.update()
+            
+            for bullet in self.bullets.copy():
+                if bullet.rect.bottom < 0:
+                    self.bullets.remove(bullet)
             # check events that occured, update 
             # screen, bullets and ship accordingly
 
@@ -74,9 +78,12 @@ class AlienInvasion:
         Fire a bullet
         """
 
-        new_bullet = Bullet(self)
-        self.bullets.add(new_bullet)
-        # make new bullet and add to bullets group
+        if len(self.bullets) < self.settings.bullets_allowed:
+        # if current number of bullets is less than what is allowed in settings
+        
+            new_bullet = Bullet(self)
+            self.bullets.add(new_bullet)
+            # make new bullet and add to bullets group
 
     def _check_keyup_events(self, event):
         """
