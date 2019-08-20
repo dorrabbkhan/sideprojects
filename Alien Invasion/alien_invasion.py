@@ -6,6 +6,7 @@ import sys
 import pygame
 from settings import Settings
 from ship import Ship
+from bullet import Bullet
 
 
 class AlienInvasion:
@@ -21,8 +22,11 @@ class AlienInvasion:
         pygame.init()
         self.settings = Settings()
         self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+        # initialize pygame, settings and create a fullscreen display
+        
         self.ship = Ship(self)
-        # initialize pygame, ship, settings and create a fullscreen display
+        self.bullets = pygame.sprite.Group()
+        # initialize ship and bullets
 
         self.settings.screen_height = self.screen.get_rect().height
         self.settings.screen_width = self.screen.get_rect().width
@@ -31,6 +35,7 @@ class AlienInvasion:
         pygame.display.set_caption("Alien Invasion")
         self.bg_color = (200, 200, 200)
         # set display caption and bg color
+
 
     def run_game(self):
         """
@@ -41,7 +46,9 @@ class AlienInvasion:
             self._check_events()
             self._update_screen()
             self.ship.update()
-            # check events that occured, update screen and ship accordingly
+            self.bullets.update()
+            # check events that occured, update 
+            # screen, bullets and ship accordingly
 
     def _update_screen(self):
         """
@@ -54,8 +61,22 @@ class AlienInvasion:
         self.ship.blitme()
         # draw the ship
 
+        for bullet in self.bullets.sprites():
+            bullet.draw_bullet()
+        # draw each bullet
+
         pygame.display.flip()
         # display most recent screen
+
+
+    def _fire_bullet(self):
+        """
+        Fire a bullet
+        """
+
+        new_bullet = Bullet(self)
+        self.bullets.add(new_bullet)
+        # make new bullet and add to bullets group
 
     def _check_keyup_events(self, event):
         """
@@ -86,6 +107,10 @@ class AlienInvasion:
         elif event.key == pygame.K_q:
             sys.exit()
             # quit if Q is pressed
+
+        elif event.key == pygame.K_SPACE:
+            self._fire_bullet()
+            # fire bullet if spacebar is pressed
 
     def _check_events(self):
         """
