@@ -45,25 +45,25 @@ class Deck():
         self.cards = []
         # initialize list of cards in this deck
 
-        for i in range(4):
+        for suit in range(4):
             # for each suit
 
-            for j in range(10):
-                # for each card
+            for card_number in range(10):
+                # for each card number
 
                 new_card = Card()
-                new_card.set(SUIT[i], j+1)
+                new_card.set(SUIT[suit], card_number+1)
                 self.cards.append(new_card)
                 # create a new card and append it to this deck
 
-        for k in range(3):
+        for card in range(3):
             # for 3 cards
 
-            for l in range(4):
+            for suit in range(4):
                 # for each suit
 
                 new_card = Card()
-                new_card.set(SUIT[l], 10)
+                new_card.set(SUIT[suit], 10)
                 self.cards.append(new_card)
                 # create a card with value 10 and append it to this deck
 
@@ -76,14 +76,14 @@ class Deck():
 
     def __str__(self):
 
-        out = ''
-        for i in self.cards:
+        output = ''
+        for card in self.cards:
             # for each card
 
-            out = out + (f"{i.num} of {i.SUIT}\n")
+            output = output + (f"{card.num} of {card.SUIT}\n")
             # create output line
 
-        return out
+        return output
         # return output
 
     def shuffle(self):
@@ -126,11 +126,11 @@ class Player():
         Deal num number of cards
         '''
 
-        for i in range(num):
+        for card in range(num):
             # for each card to be dealt
 
-            card = MYDECK.pop()
-            self.hand.append(card)
+            dealt_card = MYDECK.pop()
+            self.hand.append(dealt_card)
             # pop from the deck and append to player's hand
 
     def showcards(self, num):
@@ -138,15 +138,15 @@ class Player():
         Show the first num number of cards in hand
         '''
 
-        j = 0
+        count = 0
         # initialize count
 
-        for i in self.hand:
-            j += 1
-            print(i)
+        for card in self.hand:
+            count += 1
+            print(card)
             # increment count and print card
 
-            if j == num:
+            if count == num:
                 break
                 # end if num number of cards have been shown
 
@@ -163,8 +163,8 @@ class Player():
         '''
         Print all cards in player's hand
         '''
-        for i in self.hand:
-            print(i)
+        for card in self.hand:
+            print(card)
             # print all cards
 
     def checkbust(self):
@@ -174,8 +174,8 @@ class Player():
         total = 0
         # initialize sum of card numbers
 
-        for i in self.hand:
-            total += i.num
+        for card in self.hand:
+            total += card.num
             # for each card, add it's number to total
 
         print(f"\nNew sum is {total}")
@@ -192,8 +192,8 @@ class Player():
         total = 0
         # initialize total
 
-        for i in self.hand:
-            total += i.num
+        for card in self.hand:
+            total += card.num
             # for each card in hand, add its number to total
 
         return total
@@ -202,7 +202,7 @@ class Player():
         '''
         Increment player's credits by 2*bet
         '''
-        self.credit += self.bet*2
+        self.credit += self.bet * 2
 
 
 HUMAN = Player()
