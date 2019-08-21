@@ -11,8 +11,9 @@ class GameStats:
         
         self.settings = ai_game.settings
         self.reset_stats()
-        self.game_active = True
-        # initialize settings, game_active flag and reset all stats
+        self.game_active = False
+        # initialize settings and reset all stats
+        # start game as inactive
 
     def reset_stats(self):
         """
