@@ -74,7 +74,8 @@ class AlienInvasion:
             # if any lives left
 
             self.stats.ships_left -= 1
-            # decrement lives
+            self.sb.prep_ships()
+            # decrement lives and prep image of lives to render
 
         else:
             self.stats.game_active = False
@@ -339,7 +340,8 @@ class AlienInvasion:
             self.stats.game_active = True
             self.sb.prep_score()
             self.sb.prep_level()
-            # reset stats, score, level and start game
+            self.sb.prep_ships()
+            # reset stats, score, level, lives and start game
 
             self.aliens.empty()
             self.bullets.empty()
