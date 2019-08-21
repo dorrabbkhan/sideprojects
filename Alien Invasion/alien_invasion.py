@@ -10,6 +10,7 @@ from ship import Ship
 from bullet import Bullet
 from alien import Alien
 from game_stats import GameStats
+from button import Button
 
 
 class AlienInvasion:
@@ -28,6 +29,9 @@ class AlienInvasion:
         self.stats = GameStats(self)
         # initialize pygame, settings, stats,
         # and create a fullscreen display
+
+        self.play_button = Button(self, "Play")
+        # initialize play button
 
         self.ship = Ship(self)
         self.bullets = pygame.sprite.Group()
@@ -74,6 +78,7 @@ class AlienInvasion:
 
         else:
             self.stats.game_active = False
+            pygame.mouse.set_visible(True)
 
         self.bullets.empty()
         self.aliens.empty()
@@ -248,6 +253,10 @@ class AlienInvasion:
         self.aliens.draw(self.screen)
         # draw the aliens
 
+        if not self.stats.game_active:
+            self.play_button.draw_button()
+        # draw play button if game not active
+
         pygame.display.flip()
         # display most recent screen
 
@@ -297,6 +306,34 @@ class AlienInvasion:
             self._fire_bullet()
             # fire bullet if spacebar is pressed
 
+
+    def _check_play_button(self, mouse_pos):
+        """
+        Check if play button was pressed and start game if it was
+        """
+
+        button_clicked = self.play_button.rect.collidepoint(mouse_pos)
+        # check if button is pressed
+
+        if button_clicked and not self.stats.game_active:
+            # if button is pressed and game not active
+
+            pygame.mouse.set_visible(False)
+            # hide mouse
+            
+            self.stats.reset_stats()
+            self.stats.game_active = True
+            # reset stats and start game
+
+            self.aliens.empty()
+            self.bullets.empty()
+            # empty all bullets and aliens
+
+            self._create_fleet()
+            self.ship.center_ship()
+            # create fleet and center ship
+
+
     def _check_events(self):
         """
         Listen to events
@@ -314,6 +351,10 @@ class AlienInvasion:
             elif event.type == pygame.KEYUP:
                 self._check_keyup_events(event)
                 # check keyup events if a key is lifted
+
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_pos = pygame.mouse.get_pos()
+                self._check_play_button(mouse_pos)
 
 
 if __name__ == '__main__':
