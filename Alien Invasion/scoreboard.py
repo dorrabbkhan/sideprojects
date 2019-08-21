@@ -24,15 +24,33 @@ class Scoreboard:
 
         self.prep_score()
         self.prep_high_score()
-        # prep the score and high score images
+        self.prep_level()
+        # prep the score, level and high score images
+
+    def prep_level(self):
+        """
+        Prep the level image for display
+        """
+
+        level = self.stats.level
+        level_string = f'Level {level}'
+        # obtain level and create string
+
+        self.level_image = self.font.render(level_string, True, self.text_color, self.settings.bg_color)
+        # render image
+
+        self.level_rect = self.level_image.get_rect()
+        self.level_rect.center = self.screen_rect.center
+        self.level_rect.top = 20
+        # get image rectangle and position it
+
 
     def prep_high_score(self):
         """
-        Render high score onto the screen
+        Prep the high score image for display
         """
 
         high_score = int(round(self.stats.high_score, -1))
-        print(high_score)
         # obtain high score rounded to nearest 10
 
         high_score_str = f'High score: {high_score:,}'
@@ -47,13 +65,13 @@ class Scoreboard:
 
     def prep_score(self):
         """
-        Render score onto the screen
+        Prep the score image for display
         """
 
         rounded_score = int(round(self.stats.score, -1))
         # obtain score rounded to nearest 10
 
-        score_str = f"{rounded_score:,}"
+        score_str = f"Score: {rounded_score:,}"
         # get the score
 
         self.score_image = self.font.render(
@@ -70,6 +88,7 @@ class Scoreboard:
         Display score on screen
         """
 
+        self.screen.blit(self.level_image, self.level_rect)
         self.screen.blit(self.score_image, self.score_rect)
         self.screen.blit(self.high_score_image, self.high_score_rect)
         # draw score

@@ -23,7 +23,8 @@ class GameStats:
         """
 
         self.score = 0
-        # initialize score
+        self.level = 1
+        # initialize score, level
 
         self.ships_left = self.settings.ship_limit
         # set ship's lives to its setting
