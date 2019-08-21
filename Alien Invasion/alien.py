@@ -5,6 +5,7 @@ Class file for alien in alien invasion game
 import pygame
 from pygame.sprite import Sprite
 
+
 class Alien(Sprite):
     """
     Alien class for alien invasion game
@@ -37,7 +38,7 @@ class Alien(Sprite):
         self.x += (self.settings.alien_speed * self.settings.fleet_direction)
         self.rect.x = self.x
         # add alien_speed to alien's position in the direction of fleet_direction
-    
+
     def check_edges(self):
         """
         Check if an alien has hit the edge

@@ -3,6 +3,7 @@ Class file for button in Alien Invasion game
 """
 import pygame.font
 
+
 class Button:
     """
     Class for button in Alien Invasion game
@@ -32,7 +33,8 @@ class Button:
         Render text as image and add to button
         """
 
-        self.msg_image = self.font.render(msg, True, self.text_color, self.button_color)
+        self.msg_image = self.font.render(
+            msg, True, self.text_color, self.button_color)
         # render the msg text
 
         self.msg_image_rect = self.msg_image.get_rect()
@@ -47,4 +49,3 @@ class Button:
         self.screen.fill(self.button_color, self.rect)
         self.screen.blit(self.msg_image, self.msg_image_rect)
         # draw button on screen
-    

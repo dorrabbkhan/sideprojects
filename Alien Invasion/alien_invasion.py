@@ -26,7 +26,8 @@ class AlienInvasion:
 
         pygame.init()
         self.settings = Settings()
-        self.screen = pygame.display.set_mode((800, 600))
+        self.screen = pygame.display.set_mode(
+            (self.settings.screen_width, self.settings.screen_height))
         self.stats = GameStats(self)
         # initialize pygame, settings, stats,
         # and create a fullscreen display
@@ -233,7 +234,7 @@ class AlienInvasion:
                 self.stats.score += self.settings.alien_points * len(aliens)
             self.sb.prep_score()
             self.sb.check_high_score()
-            # if there is a collision, increase score per alien and 
+            # if there is a collision, increase score per alien and
             # render to screen, also check if there is new high score
 
         if not self.aliens:

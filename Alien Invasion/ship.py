@@ -6,6 +6,7 @@ import pygame
 from pygame.sprite import Sprite
 from settings import Settings
 
+
 class Ship(Sprite):
     """
     Class for the ship in Alien Invasion
@@ -18,9 +19,9 @@ class Ship(Sprite):
 
         super().__init__()
         # initialize sprite
-        
+
         self.settings = Settings()
-        self.screen =  ai_game.screen
+        self.screen = ai_game.screen
         # initialize settings and screen
 
         self.image = pygame.image.load('img/ship.bmp')
@@ -65,7 +66,6 @@ class Ship(Sprite):
 
         self.rect.x = self.x
         # update ship's position
-
 
     def center_ship(self):
         """

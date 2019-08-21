@@ -5,7 +5,7 @@ class Settings:
 
     def __init__(self):
 
-        self.screen_width = 600
+        self.screen_width = 800
         self.screen_height = 600
         self.bg_color = (200, 200, 200)
         # set screen's resolution and bg color
@@ -24,13 +24,12 @@ class Settings:
 
         self.speedup_scale = 1.1
         # set how fast aliens speed up
-        
+
         self.initialize_dynamic_settings()
         # initialize changing values
 
         self.score_scale = 1.5
         # set how fast score increases
-
 
     def initialize_dynamic_settings(self):
         """
@@ -47,7 +46,6 @@ class Settings:
 
         self.alien_points = 50
         # set points on killing an alien
-
 
     def increase_speed(self):
         """

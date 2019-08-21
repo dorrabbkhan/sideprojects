@@ -6,6 +6,7 @@ import pygame.font
 from pygame.sprite import Group
 from ship import Ship
 
+
 class Scoreboard:
     """
     Class for scoreboard in Alien Invasion game
@@ -39,14 +40,14 @@ class Scoreboard:
         level_string = f'Level {level}'
         # obtain level and create string
 
-        self.level_image = self.font.render(level_string, True, self.text_color, self.settings.bg_color)
+        self.level_image = self.font.render(
+            level_string, True, self.text_color, self.settings.bg_color)
         # render image
 
         self.level_rect = self.level_image.get_rect()
         self.level_rect.center = self.screen_rect.center
         self.level_rect.top = 20
         # get image rectangle and position it
-
 
     def prep_high_score(self):
         """
@@ -64,7 +65,6 @@ class Scoreboard:
         self.high_score_rect = self.high_score_image.get_rect()
         self.high_score_rect.left = self.screen_rect.left + 20
         self.high_score_rect.top = 20
-
 
     def prep_score(self):
         """
