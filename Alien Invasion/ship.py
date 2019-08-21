@@ -61,3 +61,13 @@ class Ship:
 
         self.rect.x = self.x
         # update ship's position
+
+
+    def center_ship(self):
+        """
+        Center ship's position
+        """
+
+        self.rect.midbottom = self.screen_rect.midbottom
+        self.x = float(self.rect.x)
+        # recenter ship and put new x value into self.x

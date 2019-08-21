@@ -10,10 +10,11 @@ class Settings:
         self.bg_color = (200, 200, 200)
         # set screen's resolution and bg color
 
-        self.ship_speed = 1.5
-        # set ship's speed
+        self.ship_speed = 2
+        self.ship_limit = 3
+        # set ship's speed and lives
 
-        self.bullet_speed = 1.0
+        self.bullet_speed = 1.5
         self.bullet_height = 20
         self.bullet_width = 5
         self.bullet_color = (100, 100, 100)
