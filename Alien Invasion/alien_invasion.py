@@ -231,6 +231,7 @@ class AlienInvasion:
         if not self.aliens:
             self.bullets.empty()
             self._create_fleet()
+            self.settings.increase_speed()
         # create new fleet if no more aliens
 
 
@@ -320,6 +321,9 @@ class AlienInvasion:
 
             pygame.mouse.set_visible(False)
             # hide mouse
+
+            self.settings.initialize_dynamic_settings()
+            # initialize the speeds of objects
             
             self.stats.reset_stats()
             self.stats.game_active = True
