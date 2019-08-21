@@ -57,9 +57,7 @@ class AlienInvasion:
 
         ship_height = self.ship.rect.height
         available_space_y = self.screen.get_rect().height - ship_height - 6 * (alien_height)
-        print(self.screen.get_rect().height, available_space_y, alien_height, ship_height)
         number_rows = available_space_y // (2* alien_height)
-        print(number_rows)
         # calculate number of rows that fit on the screen
 
         for row_number in range(number_rows):
@@ -67,7 +65,45 @@ class AlienInvasion:
                 # for each alien
 
                 self._create_alien(alien_number, row_number)
-            
+                # create alien
+    
+
+    def _check_fleet_edges(self):
+        """
+        Check if any edge has been hit
+        """
+
+        for alien in self.aliens.sprites():
+        # for each alien
+            if alien.check_edges():
+                self._change_fleet_direction()
+                break
+                # if any alien has hit the edge, change fleet direction and break
+
+
+    def _change_fleet_direction(self):
+        """
+        Change direction of fleet and drop the fleet
+        """
+
+        for alien in self.aliens.sprites():
+        # for each alien
+
+            alien.rect.y += self.settings.fleet_drop_speed
+            # add drop speed's value to alien's y position to drop it downwards
+
+            self.settings.fleet_direction *= -1
+            # invert fleet's horizontal direction
+
+    def _update_aliens(self):
+        """
+        Update the position of aliens
+        """
+
+        self._check_fleet_edges()
+        self.aliens.update()
+        # check if the fleet has hit the edge and update aliens
+
 
     def _create_alien(self, alien_number, row_number):
         """
@@ -80,6 +116,7 @@ class AlienInvasion:
         alien_width, alien_height = alien.rect.size
         alien.x = alien_width + 2 * alien_width * alien_number
         alien.rect.x = alien.x
+
         alien.y = alien.rect.height + 2 * row_number * alien.rect.height
         alien.rect.y = alien.y
         # set its position based on alien number
@@ -95,13 +132,14 @@ class AlienInvasion:
         while True:
             self._check_events()
             self._update_bullets()
-            self._update_screen()
             self.ship.update()
             self.bullets.update()
+            self._update_aliens()
+            self._update_screen()
             
 
             # check events that occured, update 
-            # screen, bullets and ship accordingly
+            # screen, bullets, aliens and ship
 
 
     def _update_bullets(self):
@@ -113,9 +151,11 @@ class AlienInvasion:
         # update bullets on screen
 
         for bullet in self.bullets.copy():
+        # for each bullet
+
             if bullet.rect.bottom < 0:
                 self.bullets.remove(bullet)
-        # remove old bullets
+        # remove old bullets if they're out of screen
 
 
     def _update_screen(self):

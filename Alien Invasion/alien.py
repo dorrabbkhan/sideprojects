@@ -14,7 +14,8 @@ class Alien(Sprite):
 
         super().__init__()
         self.screen = ai_game.screen
-        # initialize screen
+        self.settings = ai_game.settings
+        # initialize screen and settings
 
         self.image = pygame.image.load('img/alien.bmp')
         self.image = pygame.transform.rotozoom(self.image, 0, 0.1)
@@ -27,4 +28,22 @@ class Alien(Sprite):
 
         self.x = float(self.rect.x)
         # set x as a decimal value
-        
+
+    def update(self):
+        """
+        Update alien's position
+        """
+
+        self.x += (self.settings.alien_speed * self.settings.fleet_direction)
+        self.rect.x = self.x
+        # add alien_speed to alien's position in the direction of fleet_direction
+    
+    def check_edges(self):
+        """
+        Check if an alien has hit the edge
+        """
+
+        screen_rect = self.screen.get_rect()
+        if self.rect.right >= screen_rect.right or self.rect.left <= 0:
+            return True
+        # check if edge has been hit
