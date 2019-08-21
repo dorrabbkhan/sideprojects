@@ -11,14 +11,19 @@ class GameStats:
         
         self.settings = ai_game.settings
         self.reset_stats()
+        self.high_score = 0
         self.game_active = False
         # initialize settings and reset all stats
         # start game as inactive
+
 
     def reset_stats(self):
         """
         Initialize all statistics
         """
+
+        self.score = 0
+        # initialize score
 
         self.ships_left = self.settings.ship_limit
         # set ship's lives to its setting
