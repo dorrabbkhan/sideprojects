@@ -3,9 +3,10 @@ Python class file for ship to be used in Alien Invasion game
 """
 
 import pygame
+from pygame.sprite import Sprite
 from settings import Settings
 
-class Ship:
+class Ship(Sprite):
     """
     Class for the ship in Alien Invasion
     """
@@ -15,6 +16,9 @@ class Ship:
         Initialize the ship
         """
 
+        super().__init__()
+        # initialize sprite
+        
         self.settings = Settings()
         self.screen =  ai_game.screen
         # initialize settings and screen

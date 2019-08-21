@@ -3,7 +3,8 @@ Class file for scoreboard to be used in Alien Invasion game
 """
 
 import pygame.font
-
+from pygame.sprite import Group
+from ship import Ship
 
 class Scoreboard:
     """
@@ -13,6 +14,7 @@ class Scoreboard:
     def __init__(self, ai_game):
 
         self.screen = ai_game.screen
+        self.ai_game = ai_game
         self.screen_rect = self.screen.get_rect()
         self.settings = ai_game.settings
         self.stats = ai_game.stats
@@ -25,6 +27,7 @@ class Scoreboard:
         self.prep_score()
         self.prep_high_score()
         self.prep_level()
+        self.prep_ships()
         # prep the score, level and high score images
 
     def prep_level(self):
@@ -83,6 +86,27 @@ class Scoreboard:
         self.score_rect.top = 20
         # get the score rect and position the score on the screen
 
+    def prep_ships(self):
+        """
+        Prep the ship's lives image for display
+        """
+
+        self.ships = Group()
+        # initialize ships group
+
+        for ship_number in range(self.stats.ships_left):
+            # for each live left
+
+            ship = Ship(self.ai_game)
+            # make new ship
+
+            ship.rect.x = 20 + 1.5 * ship_number * ship.rect.width
+            ship.rect.y = 10 + self.high_score_rect.bottom
+            # position the ships
+
+            self.ships.add(ship)
+            # add ship to ships
+
     def show_score(self):
         """
         Display score on screen
@@ -91,7 +115,8 @@ class Scoreboard:
         self.screen.blit(self.level_image, self.level_rect)
         self.screen.blit(self.score_image, self.score_rect)
         self.screen.blit(self.high_score_image, self.high_score_rect)
-        # draw score
+        self.ships.draw(self.screen)
+        # draw score, high score, level and ships
 
     def check_high_score(self):
         """
