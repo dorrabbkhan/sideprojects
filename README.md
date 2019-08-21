@@ -3,8 +3,11 @@
 
 Fun projects I work on in free time or when learning new stuff. Here's the current roster, ordered latest to oldest:
 
+
+
 | Name | Description |
 |--|--|
+| Alien Invasion (Python) | A fun Alien Invasion game built using Pygame and OOP. Use arrow keys to move the ship, spacebar to shoot, and don't let the aliens get to you! |
 | Instagram Schema (MySQL) | A (very) simple schema implementation of Instagram in MySQL. A picture of the Entity Relationship Diagram is also included |
 |Book Info Scraper (Python)|Scrapes information of books on http://books.toscrape.com using Scrapy and appends it into a csv file. Use scrapy runspider -o <filename>.csv bookscrape.py to execute|
 |Quote Author Guessing Game (Python)|A game that first scrapes famous quotes and author information from http://quotes.toscrape.com, stores them into a csv and then gives you 4 tries to guess the author of a random quote|
