@@ -6,7 +6,7 @@ a specific hashtag. Made with selenium and geckodriver
 import time
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.by import By
+
 
 class LikeBot:
     """
@@ -50,6 +50,7 @@ class LikeBot:
         time.sleep(10)
         # hit enter and wait for page to load
 
+
     def like_tweet(self, hashtag):
         """
         Method for liking all tweets given a hashtag
@@ -72,7 +73,16 @@ class LikeBot:
             # click all like buttons
 
 
-bot = LikeBot('email@email.com', 'password')
-bot.login()
-bot.like_tweet('hashtag')
-# create bot and log in
+def execute_bot():
+    """
+    Execute the script and like all tweets
+    """
+    bot = LikeBot('email@email.com', 'password')
+    bot.login()
+    bot.like_tweet('hashtag')
+    # create bot, log in and like tweets
+
+
+if __name__ == "__main__":
+    execute_bot()
+    
