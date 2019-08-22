@@ -3,7 +3,7 @@ Python script to automatically like tweets that contain
 a specific hashtag. Made with selenium and geckodriver
 """
 
-
+from sys import argv
 import time
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -22,13 +22,9 @@ class LikeBot:
         self.browser = webdriver.Firefox(firefox_profile=self.profile)
         # set profile to private and start firefox
 
-        self.scroll_limit = 2
-        # set how many times to scroll down
-
         self.login_wait = 10
         self.scroll_wait = 5
         # set delays for logging in and scrolling
-
 
     def _get_twitter_homepage(self):
         """
@@ -38,7 +34,6 @@ class LikeBot:
         print('Loading Twitter homepage')
         browser = self.browser
         browser.get('http://twitter.com/')
-
 
     def login(self, username, password):
         """
@@ -65,8 +60,7 @@ class LikeBot:
         time.sleep(self.login_wait)
         # hit enter and wait for page to load
 
-
-    def like_tweet(self, hashtag):
+    def like_tweet(self, hashtag, scroll_limit):
         """
         Method for liking all tweets given a hashtag
         """
@@ -77,20 +71,21 @@ class LikeBot:
         # open the URL for the hashtag
 
         print('Scrolling down')
-        for i in range(self.scroll_limit):
-            browser.execute_script('window.scrollTo(0, document.body.scrollHeight)')
-            time.sleep(self.scroll_wait)
+        for i in range(scroll_limit):
+            browser.execute_script(
+                'window.scrollTo(0, document.body.scrollHeight)')
+            time.sleep(scroll_wait)
         # scroll down and wait scroll_wait seconds three times
 
         print('Finding like buttons')
-        like_buttons = browser.find_elements_by_xpath("//div[@data-testid='like']")
+        like_buttons = browser.find_elements_by_xpath(
+            "//div[@data-testid='like']")
         # find all like buttons by custom attribute "data-testid='like'"
 
         print('Liking tweets')
         for like_button in like_buttons:
             like_button.click()
             # click all like buttons
-
 
     def logout(self):
         """
@@ -102,23 +97,26 @@ class LikeBot:
         browser.get('http://www.twitter.com/logout')
         # go to logout page
 
-        logout_button = browser.find_elements_by_xpath("//div[@data-testid='confirmationSheetConfirm']")
+        logout_button = browser.find_elements_by_xpath(
+            "//div[@data-testid='confirmationSheetConfirm']")
         logout_button.click()
         # click logout button
 
 
-def execute_bot():
+def execute_bot(username, password, hashtag, scroll_limit):
     """
     Execute the script and like all tweets
     """
-    
+
     bot = LikeBot()
-    bot.login('dorrabbk@gmail.com', 'Luc!f3r0n')
-    bot.like_tweet('hashtag')
+    bot.login(username, password)
+    bot.like_tweet(hashtag, scroll_limit)
     bot.logout()
     # create bot, log in, like tweets and logout
 
 
 if __name__ == "__main__":
-    execute_bot()
-    
+
+    username, password, hashtag, scroll_limit = tuple(argv[1:5])
+    execute_bot(username, password, hashtag, scroll_limit)
+    # get arguments from command line and execute bot
