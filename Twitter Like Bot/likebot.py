@@ -6,6 +6,7 @@ a specific hashtag. Made with selenium and geckodriver
 import time
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
 
 class LikeBot:
     """
@@ -18,7 +19,10 @@ class LikeBot:
         self.password = password
         # initialize username and password
 
-        self.browser = webdriver.Firefox()
+        self.profile = webdriver.FirefoxProfile()
+        self.profile.set_preference("browser.privatebrowsing.autostart", True)
+        self.browser = webdriver.Firefox(firefox_profile=self.profile)
+
 
     def login(self):
         """
@@ -43,9 +47,32 @@ class LikeBot:
         # fill the input boxes
 
         password.send_keys(Keys.ENTER)
-        # hit enter
+        time.sleep(10)
+        # hit enter and wait for page to load
+
+    def like_tweet(self, hashtag):
+        """
+        Method for liking all tweets given a hashtag
+        """
+
+        browser = self.browser
+        browser.get(f'https://twitter.com/search?q={hashtag}&src=typed_query')
+        # open the URL for the hashtag
+
+        for i in range(3):
+            browser.execute_script('window.scrollTo(0, document.body.scrollHeight)')
+            time.sleep(5)
+        # scroll down and wait 5 s three times
+
+        like_buttons = browser.find_elements_by_xpath("//div[@data-testid='like']")
+        # find all like buttons by custom attribute "data-testid='like'"
+
+        for like_button in like_buttons:
+            like_button.click()
+            # click all like buttons
 
 
 bot = LikeBot('email@email.com', 'password')
 bot.login()
+bot.like_tweet('hashtag')
 # create bot and log in
