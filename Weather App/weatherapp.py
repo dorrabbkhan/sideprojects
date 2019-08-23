@@ -2,12 +2,14 @@
 Simple weather application built in Tkinter
 """
 
+
 import tkinter as tk
 import requests
+from tkinter import font
 
 
 HEIGHT = 400
-WIDTH = 600
+WIDTH = 500
 # set window width and height
 
 
@@ -23,50 +25,69 @@ def get_weather(city):
 
     response = requests.get(url, params=params)
     weather = response.json()
-    populate_label(weather)
-    # parse the response and populate label
+    populate_labels(weather)
+    # parse the response and populate labels
 
 
-def populate_label(weather):
+def populate_labels(weather):
     """
-    Extract values from JSON and put into the output label
+    Extract values from JSON and put into the output labels
     """
-    
-    place_name = weather['name']
-    description = weather['weather'][0]['description'].title()
-    temp = weather['main']['temp']
-    pressure = weather['main']['pressure']
-    humidity = weather['main']['humidity']
-    min_temp = weather['main']['temp_min']
-    max_temp = weather['main']['temp_max']
-    wind = weather['wind']
-    visibility = weather['visibility']
-    # extract all values
 
-    text = f"City: {place_name}\nDescription:{description}\nTemperature:{temp}"
-    label['text'] = text
-    # populate the label
+    try:
+        place_name = weather['name']
+        description = weather['weather'][0]['description'].title()
+        temp = weather['main']['temp']
+        pressure = weather['main']['pressure']
+        humidity = weather['main']['humidity']
+        min_temp = weather['main']['temp_min']
+        max_temp = weather['main']['temp_max']
+        visibility = weather['visibility']
+        # extract all values
+
+    except:
+        lower_label_two['text'] = "Error retrieving information"
+        # display error message
+
+    else:
+        city_label['text'] = place_name
+        temp_label['text'] = str(temp) + " °C"
+        desc_label['text'] = description
+        lower_label_one['text'] = f'Humiditiy: {humidity} %   Min: {min_temp} °C    Max: {max_temp} °C'
+        lower_label_two['text'] = f"Pressure: {pressure} mb     Visibility: {visibility}m"
+        # populate the label
 
 
 root = tk.Tk()
-canvas = tk.Canvas(root, height=HEIGHT, width=WIDTH)
-canvas.pack()
+root.resizable(0, 0)
 # create root and canvas
 
-frame = tk.Frame(root, bg='blue')
-frame.place(relwidth=1, relheight=1)
+frame = tk.Frame(root, bg='#4f8eb0', bd=20, height=HEIGHT, width=WIDTH)
+frame.pack()
 # create main frame
 
-label = tk.Label(frame, text="This is a label", bg='gray')
-label.place(relx=0, rely=0.1, relwidth=1, relheight=0.9)
+city_label = tk.Label(frame, bg='#4f8eb0', font=('Segoe UI', 20))
+city_label.place(relx=0, rely=0.1, relwidth=1, relheight=0.25)
+
+temp_label = tk.Label(frame, bg='#4f8eb0', font=('Segoe UI', 90))
+temp_label.place(relx=0, rely=0.3, relwidth=1, relheight=0.3)
+
+desc_label = tk.Label(frame, bg='#4f8eb0', font=('Segoe UI', 30))
+desc_label.place(relx=0, rely=0.6, relwidth=1, relheight=0.3)
+
+lower_label_one = tk.Label(frame, bg='#4f8eb0', font=('Segoe UI', 15))
+lower_label_one.place(relx=0, rely=0.85, relwidth=1, relheight=0.075)
+
+lower_label_two = tk.Label(frame, bg='#4f8eb0', font=('Segoe UI', 15))
+lower_label_two.place(relx=0, rely=0.925, relwidth=1, relheight=0.075)
 
 entry = tk.Entry(frame, bg='white')
 entry.place(relx=0, rely=0, relwidth=0.8, relheight=0.1)
 
-button = tk.Button(root, text="Text Button", bg='black',
-                   fg='white', bd=5, command=lambda: get_weather(entry.get()))
+button = tk.Button(frame, text="Get weather", bg='white',
+                   fg='black', command=lambda: get_weather(entry.get()))
 button.place(relx=0.8, rely=0, relwidth=0.2, relheight=0.1)
-# create label, entry and button
+# create labels, entry and button
 
 root.mainloop()
 # make window
