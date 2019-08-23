@@ -45,8 +45,12 @@ def populate_labels(weather):
         # extract all values
 
     except:
+        city_label['text'] = ""
+        temp_label['text'] = ""
+        desc_label['text'] = ""
         lower_label_one['text'] = "Error retrieving information"
-        # display error message if error occurs
+        lower_label_two['text'] = ""
+        # make all labels blank and display error message if error occurs
 
     else:
         city_label['text'] = place_name
@@ -59,6 +63,7 @@ def populate_labels(weather):
 
 root = tk.Tk()
 root.resizable(0, 0)
+root.title('Weather App')
 # create root and canvas and don't allow resizing
 
 frame = tk.Frame(root, bg='#4f8eb0', bd=10, height=HEIGHT, width=WIDTH)
