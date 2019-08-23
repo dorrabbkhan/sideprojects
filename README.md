@@ -1,12 +1,20 @@
 # Side Projects
 
 
+
+
+
 Fun projects I work on in free time or when learning new stuff. Here's the current roster, ordered latest to oldest:
+
+
+
+
 
 
 
 | Name | Description |
 |--|--|
+| Weather App (Python) | GUI weather app written in Python using Tkinter that uses requests module to communicate with Openweathermap API, parses the JSON and outputs current weather conditions for a given city! |
 | Twitter Like Bot (Python) | A Python bot that uses Selenium webdriver, Gecko driver and Firefox to automatically like tweets of a certain hashtag! |
 | Alien Invasion (Python) | A fun Alien Invasion game built using Pygame and OOP. Use arrow keys to move the ship, spacebar to shoot, and don't let the aliens get to you! |
 | Instagram Schema (MySQL) | A (very) simple schema implementation of Instagram in MySQL. A picture of the Entity Relationship Diagram is also included |
