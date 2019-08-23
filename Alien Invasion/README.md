@@ -5,7 +5,7 @@
 
 
 
-![Screenshot](/screenshot.png)
+![Screenshot](/Alien Invasion/screenshot.png)
 
 
 
