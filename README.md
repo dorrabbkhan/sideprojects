@@ -10,8 +10,6 @@ Fun projects I work on in free time or when learning new stuff. Here's the curre
 
 
 
-
-
 | Name | Description |
 |--|--|
 | Weather App (Python) | GUI weather app written in Python using Tkinter that uses requests module to communicate with Openweathermap API, parses the JSON and outputs current weather conditions for a given city! |
