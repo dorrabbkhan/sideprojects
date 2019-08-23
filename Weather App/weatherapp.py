@@ -5,10 +5,9 @@ Simple weather application built in Tkinter
 
 import tkinter as tk
 import requests
-from tkinter import font
 
 
-HEIGHT = 400
+HEIGHT = 500
 WIDTH = 500
 # set window width and height
 
@@ -46,25 +45,25 @@ def populate_labels(weather):
         # extract all values
 
     except:
-        lower_label_two['text'] = "Error retrieving information"
-        # display error message
+        lower_label_one['text'] = "Error retrieving information"
+        # display error message if error occurs
 
     else:
         city_label['text'] = place_name
         temp_label['text'] = str(temp) + " °C"
         desc_label['text'] = description
-        lower_label_one['text'] = f'Humiditiy: {humidity} %   Min: {min_temp} °C    Max: {max_temp} °C'
-        lower_label_two['text'] = f"Pressure: {pressure} mb     Visibility: {visibility}m"
-        # populate the label
+        lower_label_one['text'] = f'Humiditiy: {humidity} %\tMin: {min_temp} °C\tMax: {max_temp} °C'
+        lower_label_two['text'] = f"Pressure: {pressure} mb\tVisibility: {visibility}m"
+        # populate the labels
 
 
 root = tk.Tk()
 root.resizable(0, 0)
-# create root and canvas
+# create root and canvas and don't allow resizing
 
-frame = tk.Frame(root, bg='#4f8eb0', bd=20, height=HEIGHT, width=WIDTH)
+frame = tk.Frame(root, bg='#4f8eb0', bd=10, height=HEIGHT, width=WIDTH)
 frame.pack()
-# create main frame
+# create main frame and set its dimensions
 
 city_label = tk.Label(frame, bg='#4f8eb0', font=('Segoe UI', 20))
 city_label.place(relx=0, rely=0.1, relwidth=1, relheight=0.25)
@@ -80,14 +79,20 @@ lower_label_one.place(relx=0, rely=0.85, relwidth=1, relheight=0.075)
 
 lower_label_two = tk.Label(frame, bg='#4f8eb0', font=('Segoe UI', 15))
 lower_label_two.place(relx=0, rely=0.925, relwidth=1, relheight=0.075)
+# create all labels for information
 
-entry = tk.Entry(frame, bg='white')
+entry = tk.Entry(frame, bg='white', font=('Segoe UI', 10))
 entry.place(relx=0, rely=0, relwidth=0.8, relheight=0.1)
+# create the text box
 
-button = tk.Button(frame, text="Get weather", bg='white',
-                   fg='black', command=lambda: get_weather(entry.get()))
+button = tk.Button(
+    frame, text="Get weather", bg='white',
+    fg='black', font=('Segoe UI', 10),
+    command=lambda: get_weather(entry.get())
+    )
 button.place(relx=0.8, rely=0, relwidth=0.2, relheight=0.1)
-# create labels, entry and button
+# create the button and set its command
+
 
 root.mainloop()
 # make window
